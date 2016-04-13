@@ -17,9 +17,6 @@ class DateTime extends React.Component {
     render () {
         return (
             <div className='date-container'>
-                <div className='date-format'>
-                    {this.props.appState.formatDate}
-                </div>
                 <div className='date-picker'>
                     <DatePicker
                         selected={this.props.appState.momentDate}
@@ -35,8 +32,8 @@ DateTime.contextTypes = {
     executeAction: React.PropTypes.func.isRequired,
 };
 
-DateTime = connectToStores(DateTime, ['ApplicationStore'], (context) => ({
-    appState: context.getStore('ApplicationStore').getState(),
+DateTime = connectToStores(DateTime, ['AddBookingStore'], (context) => ({
+    appState: context.getStore('AddBookingStore').getState(),
 }));
 
 export default DateTime;

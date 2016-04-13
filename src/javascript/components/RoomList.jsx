@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import RoomActions from 'actions/RoomActions';
 import RoomStore from 'stores/RoomStore';
 import { connectToStores } from 'fluxible-addons-react';
+import $ from 'jquery';
 
 class RoomList extends React.Component {
 
@@ -21,7 +22,6 @@ class RoomList extends React.Component {
                             <img className='thumb-md' src={room.image} />
                             <div className='room-meta'>
                                 <div className='room-title'>{room.room}</div>
-                                <div className='room-status'>{room.status}</div>
                                 <div className='room-location'>{room.location}</div>
                             </div>
                         </Link>

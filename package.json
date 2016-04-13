@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "alt": "^0.18.4",
+    "async": "^2.0.0-rc.3",
     "babel-plugin-module-alias": "^1.2.0",
     "babel-plugin-transform-class-properties": "^6.5.2",
     "babel-polyfill": "^6.3.14",
@@ -53,6 +54,7 @@
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-2": "^6.3.13",
     "babel-register": "^6.3.13",
+    "body-parser": "^1.15.0",
     "debug": "^2.2.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.3",
@@ -60,12 +62,17 @@
     "fluxible": "^1.0.3",
     "fluxible-action-utils": "^0.2.4",
     "fluxible-addons-react": "^0.2.0",
+    "isotope-layout": "^2.2.2",
     "jquery": "^2.2.3",
     "lodash": "^4.3.0",
     "moment": "^2.12.0",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.7.0",
     "react": "^0.14.7",
     "react-datepicker": "^0.25.0",
     "react-dom": "^0.14.7",
-    "react-router": "^2.0.0"
+    "react-router": "^2.0.0",
+    "react-time-picker": "^1.1.0",
+    "request": "^2.71.0"
   }
 }

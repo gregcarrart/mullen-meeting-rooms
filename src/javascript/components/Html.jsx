@@ -30,6 +30,7 @@ class Html extends React.Component {
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:400,600" />
                     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
                     <link rel="stylesheet" href={this.context.assetUrl('/css/styles.css')} />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"></script>
                 </head>
                 <body>
                     <div

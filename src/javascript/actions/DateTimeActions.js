@@ -1,5 +1,5 @@
 
 export default function updateDate(actionContext, payload, done) {
-    actionContext.dispatch('UPDATE_DATE', payload);
+    actionContext.dispatch('CHANGE_DATE', payload);
     done();
 }

@@ -1,26 +1,29 @@
 import BaseStore from 'fluxible/addons/BaseStore';
+import _ from 'lodash';
 import $ from 'jquery';
 
-class RoomStore extends BaseStore {
-    static storeName = 'RoomStore';
+class CurrentRoomStore extends BaseStore {
+    static storeName = 'CurrentRoomStore';
 
     static handlers = {
-        GET_ROOMS: 'onGetRooms',
+        GET_ROOM: 'onGetRoom',
         UDPATE_DATE: 'onUpdateDate',
-        GET_BOOKINGS: 'onGetBookings'
     }
 
     constructor (dispatcher) {
         super(dispatcher);
-        this.rooms = null;
-        this.bookings = null;
+        this.currentRoom = null;
     }
 
-    onGetRooms () {
+    onGetRoom (room) {
         $.ajax({url: '../json/data.json'})
             .done((data) => {
-                this.rooms = data;
-                this.emitChange();
+                data.map((item) => {
+                    if (item.room.toLowerCase() == room.roomName) {
+                        this.currentRoom = item;
+                        this.emitChange();
+                    }
+                });
             });
     }
 
@@ -32,18 +35,9 @@ class RoomStore extends BaseStore {
             });
     }
 
-    onGetBookings () {
-        $.ajax({url: '../json/bookings.json'})
-            .done((data) => {
-                this.bookings = data;
-                this.emitChange();
-            })
-    }
-
     getState () {
         return {
-            rooms: this.rooms,
-            bookings: this.bookings
+            currentRoom: this.currentRoom
         }
     }
 
@@ -53,9 +47,8 @@ class RoomStore extends BaseStore {
 
     // For rehydrating server state
     rehydrate (state) {
-        this.rooms = state.rooms;
-        this.bookings = state.bookings;
+        this.currentRoom = state.currentRoom;
     }
 }
 
-export default RoomStore;
+export default CurrentRoomStore;

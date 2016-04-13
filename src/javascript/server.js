@@ -2,6 +2,11 @@ import path from 'path';
 import d from 'debug';
 import express from 'express';
 import expressState from 'express-state';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import request from 'request';
+import mongoose from 'mongoose';
+import async from 'async';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import { provideContext } from 'fluxible-addons-react';
@@ -19,9 +24,16 @@ const debug = d('Server');
 
 const server = express();
 
-expressState.extend(server);
-
+server.use(morgan('dev'));
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
 server.use('/', express.static(path.resolve('./build')));
+
+server.post('/api/bookings', function(req, res) {
+    res.send({message: 'YO DAWG'});
+});
+
+expressState.extend(server);
 
 server.use((req, res) => {
     const location = createMemoryHistory().createLocation(req.url);
