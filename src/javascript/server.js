@@ -13,10 +13,17 @@ import { provideContext } from 'fluxible-addons-react';
 import app from './app';
 import Html from 'components/Html.jsx';
 
+// Models
+import Room from '../../server/models/Room.js';
+import Booking from '../../server/models/Booking.js';
+
 // Routing
 import { RouterContext, match } from 'react-router';
 import routes from 'components/Routes.jsx';
 import { createMemoryHistory } from 'react-router';
+
+// config
+import config from '../../config/dev';
 
 import fetchRouteData from 'utils/fetchRouteData';
 
@@ -24,13 +31,38 @@ const debug = d('Server');
 
 const server = express();
 
+mongoose.connect(config.dev.url);
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?'.red);
+});
+
 server.use(morgan('dev'));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 server.use('/', express.static(path.resolve('./build')));
 
+server.get('/api/bookings', function(req, res) {
+    Booking.find({}, function(err, bookings) {
+        res.send(bookings);
+    });
+});
+
 server.post('/api/bookings', function(req, res) {
-    res.send({message: 'YO DAWG'});
+    var booking = new Booking({
+        date: req.body.date,
+        time: req.body.time,
+        duration: req.body.duration,
+        contact: req.body.contact,
+        room: req.body.room
+    });
+
+    booking.save(function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        };
+        res.send({message: 'Booking has been created!'});
+    });
 });
 
 expressState.extend(server);

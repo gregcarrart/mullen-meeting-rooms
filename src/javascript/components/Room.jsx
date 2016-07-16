@@ -2,6 +2,7 @@ import React from 'react';
 import RoomActions from 'actions/RoomActions';
 import BookingActions from 'actions/BookingActions';
 import RoomStore from 'stores/RoomStore';
+import moment from 'moment';
 import { Link, IndexLink } from 'react-router';
 import { connectToStores } from 'fluxible-addons-react';
 
@@ -12,21 +13,25 @@ class Room extends React.Component {
         this.context.executeAction(BookingActions, {});
     }
 
-    render() {
+    render () {
         let room = null;
         let bookingsArray = [];
         let bookings = null;
         let roomName = null;
 
-        if (this.props.roomState.rooms && this.props.roomState.bookings) {
+        if (this.props.roomState.rooms) {
             room = this.props.roomState.rooms.map((room) => {
                 if (this.props.params.roomName === room.room.toLowerCase()) {
                     roomName = room.room.toLowerCase();
-                    this.props.roomState.bookings.map((booking) => {
-                        if (booking.roomId === room.id) {
-                            bookingsArray.push(booking);
-                        }
-                    });
+
+                    if (this.props.roomState.bookings) {
+                        this.props.roomState.bookings.map((booking) => {
+                            if (booking.room === roomName) {
+                                bookingsArray.push(booking);
+                            }
+                        });
+                    }
+                    
                     return (
                         <div key={room.id}>
                             <h1>{room.room}</h1>
@@ -43,11 +48,13 @@ class Room extends React.Component {
 
         if (bookingsArray.length > 0) {
             bookings = bookingsArray.map((booking, i) => {
+                let formattedDate = moment(booking.date).format('l');
                 return (
                     <div key={i}>
-                        <div>{booking.date}</div>
-                        <div>{booking.time}</div>
-                        <div>{booking.contact}</div>
+                        <div>Date: {formattedDate}</div>
+                        <div>Time: {booking.time}</div>
+                        <div>Duration: {booking.duration}</div>
+                        <div>Contact: {booking.contact}</div>
                     </div>
                 );
             });

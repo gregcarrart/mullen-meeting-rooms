@@ -11,7 +11,7 @@ import ResetDateActions from 'actions/ResetDateActions';
 import ResetDurationActions from 'actions/ResetDurationActions';
 import AddBookingStore from 'stores/AddBookingStore';
 import DateTime from 'components/DateTime';
-import TimePicker from 'react-time-picker'
+import TimePicker from 'react-time-picker';
 
 class AddBooking extends React.Component {
 
@@ -26,8 +26,14 @@ class AddBooking extends React.Component {
         this.handleSubmit = ((event) => {
             event.preventDefault();
             let contact = this.refs.emailTextField.value;
-            console.log(this);
-            this.context.executeAction(AddBookingActions, {contact: contact, currentRoom: this.props.params.roomName});
+            this.context.executeAction(AddBookingActions,
+                {
+                    contact: contact,
+                    currentRoom: this.props.params.roomName,
+                    duration: this.props.bookingState.currentDuration,
+                    time: this.props.bookingState.currentTime,
+                    date: this.props.bookingState.momentDate
+                });
         });
         this.value = null;
     }

@@ -1,0 +1,5 @@
+{
+	"dev": {
+		"url" : "mongodb://admin:Mullen123@ds033123.mlab.com:33123/mullen-rooms"
+	}
+}

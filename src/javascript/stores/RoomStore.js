@@ -33,7 +33,7 @@ class RoomStore extends BaseStore {
     }
 
     onGetBookings () {
-        $.ajax({url: '../json/bookings.json'})
+        $.ajax({url: '/api/bookings'})
             .done((data) => {
                 this.bookings = data;
                 this.emitChange();

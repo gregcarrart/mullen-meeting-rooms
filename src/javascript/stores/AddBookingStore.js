@@ -24,16 +24,21 @@ class AddBookingStore extends BaseStore {
     }
 
     onAddBooking (data) {
+        let formattedDate = data.date.format();
         $.ajax({
             type: 'POST',
             url: '/api/bookings',
             data: {
                 room: data.currentRoom,
-                contact: data.contact
+                contact: data.contact,
+                date: formattedDate,
+                time: data.time,
+                duration: data.duration
             }
         })
         .done((data) => {
-            console.log(data.message);
+            console.log(this.context);
+            //this.context.router.goBack();
         })
         .fail((jqXhr) => {
             console.log('FAIL');
