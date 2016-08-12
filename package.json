@@ -52,6 +52,7 @@
     "babel-preset-react": "6.3.13",
     "babel-preset-stage-2": "6.3.13",
     "babel-register": "6.7.2",
+    "body-parser": "^1.15.2",
     "config": "^1.21.0",
     "debug": "2.2.0",
     "dotenv": "2.0.0",
@@ -60,9 +61,15 @@
     "fluxible": "1.0.5",
     "fluxible-action-utils": "0.2.4",
     "fluxible-addons-react": "0.2.8",
+    "jquery": "^3.1.0",
     "lodash": "4.3.0",
+    "moment": "^2.14.1",
+    "mongoose": "^4.5.8",
+    "morgan": "^1.7.0",
     "react": "15.0.0",
+    "react-datepicker": "^0.29.0",
     "react-dom": "15.0.0",
-    "react-router": "2.0.1"
+    "react-router": "2.0.1",
+    "react-time-picker": "^1.1.1"
   }
 }

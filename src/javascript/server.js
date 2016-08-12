@@ -1,7 +1,7 @@
 import path from 'path';
 import d from 'debug';
 import express from 'express';
-import config from 'config';
+//import config from 'config';
 import expressState from 'express-state';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -23,30 +23,40 @@ import { RouterContext, match } from 'react-router';
 import routes from 'components/Routes.jsx';
 import { createMemoryHistory } from 'react-router';
 
+// config
+import config from '../../config/dev';
+
 
 import fetchRouteData from 'utils/fetchRouteData';
 
 const debug = d('Server');
 const server = express();
 
-//Detect NODE_ENV
-switch(config.util.getEnv('NODE_ENV')){
-    case 'dev':
-        let configDB = config.get('dev');
-        mongoose.connect(configDB.url);
+// //Detect NODE_ENV
+// switch(config.util.getEnv('NODE_ENV')){
+//     case 'dev':
+//         console.log('yo');
+//         let configDB = config.get('dev');
+//         mongoose.connect(configDB.url);
+//
+//         break;
+//
+//     case 'production':
+//
+//         mongoose.connect(process.env.MONGO_DB);
+//
+//         break;
+//
+//     default:
+//         console.log('env error');
+// }
 
-        break;
-
-    case 'production':
-
-        mongoose.connect(process.env.MONGO_DB);
-
-        break;
-
-    default:
-        console.log('env error');
+if (process.env.MONGO_DB) {
+    mongoose.connect(process.env.MONGO_DB);
+} else {
+    //let configDB = config.get('dev');
+    mongoose.connect(config.dev.url);
 }
-
 
 // mongoose.connect(config.dev.url);
 // mongoose.connection.on('error', function() {

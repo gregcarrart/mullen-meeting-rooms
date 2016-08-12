@@ -1,11 +1,13 @@
-var gulp = require('gulp-help')(require('gulp'));
+var gulp = require('gulp');
 var config = require('../config').production;
-var cssNano = require('gulp-cssnano');
+var minifyCSS = require('gulp-clean-css');
 var size = require('gulp-filesize');
 
-gulp.task('minifyCss', false, ['sass'], function() {
+gulp.task('minifyCss', ['sass'], function() {
     return gulp.src(config.cssSrc)
-        .pipe(cssNano())
-        .pipe(gulp.dest(config.dest + '/css'))
+        .pipe(minifyCSS({
+            keepBreaks: true
+        }))
+        .pipe(gulp.dest(config.dest))
         .pipe(size());
-})
+});
