@@ -17,7 +17,7 @@ class RoomStore extends BaseStore {
     }
 
     onGetRooms () {
-        $.ajax({url: '../json/data.json'})
+        $.ajax({url: 'https://api.myjson.com/bins/5ckj1'})
             .done((data) => {
                 this.rooms = data;
                 this.emitChange();
@@ -25,7 +25,7 @@ class RoomStore extends BaseStore {
     }
 
     onUpdateDate () {
-        $.ajax({url: '../json/data.json'})
+        $.ajax({url: 'https://api.myjson.com/bins/5ckj1'})
             .done((data) => {
                 this.rooms = data;
                 this.emitChange();
