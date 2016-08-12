@@ -15,7 +15,7 @@ class FooterStore extends BaseStore {
     }
 
     onGetTopRooms () {
-        $.ajax({url: '../json/data.json'})
+        $.ajax({url: 'https://api.myjson.com/bins/5ckj1'})
             .done((data) => {
                 let sortedData = _.sortBy(data, function(o) { return o.bookingsCount * -1; });
                 this.topRooms = sortedData.slice(0, 5);
