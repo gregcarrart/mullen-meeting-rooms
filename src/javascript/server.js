@@ -27,7 +27,6 @@ import { createMemoryHistory } from 'react-router';
 import fetchRouteData from 'utils/fetchRouteData';
 
 const debug = d('Server');
-
 const server = express();
 
 //Detect NODE_ENV
